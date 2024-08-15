@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Captioning Result</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #c2fc65, #b6095f);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: backgroundAnimation 10s infinite;
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #bbd67a, #741477); }
+            25% { background: linear-gradient(135deg, #11c7f5, #f8501d); }
+            50% { background: linear-gradient(135deg, #f8501d, #0ac749); }
+            75% { background: linear-gradient(135deg, #855309, #9c0e61); }
+            100% { background: linear-gradient(135deg, #490383, #0ac749); }
+        }
+        .container {
+            background-color: #0b9bdd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #2c064b;
+        }
+        .images-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .images-container img {
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            margin: 0 10px;
+            width: 45%; /* Adjust width as needed */
+        }
+        p {
+            color: #130101;
+            font-size: 18px;
+        }
+        audio {
+            margin-top: 20px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Captioning Result</h1>
+        <div class="images-container">
+            <img src="{{ image_url }}" alt="Uploaded Image">
+            <img src="{{ processed_image_url }}" alt="Processed Image with Detected Objects">
+        </div>
+        <p>Caption: {{ caption }}</p>
+        <audio controls autoplay>
+            <source src="{{ url_for('uploaded_file', filename='caption.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <br>
+        <a href="/">Upload Another Image</a>
+    </div>
+</body>
+</html>

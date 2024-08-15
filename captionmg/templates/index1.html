@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple web app to capture an image from your webcam and upload it for captioning.">
+    <meta name="keywords" content="image capture, webcam, upload, captioning, HTML5">
+    <title>Capture Image for Captioning</title>
+    <style>
+         body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0ac749, #11c7f5);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: backgroundAnimation 10s infinite;
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #0ac749, #11c7f5); }
+            25% { background: linear-gradient(135deg, #11c7f5, #f8501d); }
+            50% { background: linear-gradient(135deg, #7297af, #0ac749); }
+            75% { background: linear-gradient(135deg, #f35d8f, #db7f28); }
+            100% { background: linear-gradient(135deg, #0905f7, #cfe605); }
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: linear-gradient(135deg, #f49b0b, #e2134c);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        video {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        #upload-form {
+            margin-top: 20px;
+        }
+        #upload-form button {
+            background-color: #28a745;
+        }
+        #upload-form button:hover {
+            background-color: #218838;
+        }
+        footer {
+            margin-top: 20px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Capture Image for Captioning</h1>
+        </header>
+        <main>
+            <div>
+                <video id="video" autoplay></video>
+                <button id="capture">Capture</button>
+            </div>
+            <form id="upload-form" action="/upload_capture" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="image" id="image">
+            </form>
+        </main>
+        <footer>
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        const video = document.getElementById('video');
+        const captureButton = document.getElementById('capture');
+        const imageInput = document.getElementById('image');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(err => {
+                console.error('Error accessing webcam:', err);
+            });
+
+        captureButton.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0);
+            const dataUrl = canvas.toDataURL('image/jpeg');
+            imageInput.value = dataUrl;
+            document.getElementById('upload-form').submit();
+        });
+    </script>
+</body>
+</html>

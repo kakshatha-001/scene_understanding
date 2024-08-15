@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Captioning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web application for uploading or capturing images to generate captions!!!">
+    <meta name="keywords" content="image captioning, AI, machine learning, image processing">
+    <meta name="author" content="Your Name">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fa7508;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(135deg, #fa7508 0%, #e0c3fc 100%);
+        }
+        .container {
+            background-color: #7abde4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            color: #0e0000;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+        button {
+            background-color: #589c97;
+            color: rgba(48, 3, 247, 0.788);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #e68e0b86;
+            transform: translateY(-3px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Captioning</h1>
+        <button onclick="window.location.href='/upload_image'">Upload Image</button>
+        <button onclick="window.location.href='/capture_image'">Capture Image</button>
+    </div>
+</body>
+</html>

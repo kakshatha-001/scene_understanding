@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Captioning Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upload an image and get a caption generated for it.">
+    <meta name="keywords" content="image captioning, AI, upload image, generate caption">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Montserrat&display=swap">
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0ac749, #11c7f5);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: backgroundAnimation 10s infinite;
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #0ac749, #11c7f5); }
+            25% { background: linear-gradient(135deg, #11c7f5, #f8501d); }
+            50% { background: linear-gradient(135deg, #f8501d, #0ac749); }
+            75% { background: linear-gradient(135deg, #0ac749, #007bff); }
+            100% { background: linear-gradient(135deg, #007bff, #0ac749); }
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+            max-width: 600px;
+            margin-bottom: 20px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        @keyframes fadeIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #f8501d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        img {
+            border: 5px solid #6c0abd;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        audio {
+            margin-top: 20px;
+        }
+        a {
+            display: inline-block;
+            background-color: #6c0abd;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        a:hover {
+            background-color: #4a0072;
+            transform: scale(1.05);
+        }
+
+        /* Upload form styles */
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+            max-width: 600px;
+            margin-bottom: 20px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .upload-container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+            border: 2px solid #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type="file"]:focus {
+            border-color: #0056b3;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container, .upload-container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Upload form Section -->
+    <div class="upload-container">
+        <h1>Upload an Image</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*">
+            <input type="submit" value="Upload">
+        </form>
+        <div class="footer">
+            <p>Powered by Image Captioning</p>
+        </div>
+    </div>
+
+    <script>
+        // Delayed showing of the containers for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            var containers = document.querySelectorAll('.container, .upload-container');
+            containers.forEach(function(container, index) {
+                setTimeout(function() {
+                    container.classList.add('show');
+                }, index * 500); // Delay each container by 500ms
+            });
+        });
+    </script>
+</body>
+</html>
